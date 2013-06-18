@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------------
-** demo xadow oled, hello world
+** demo of xadow oled, horizontal addressing mode
 ** loovee 2013-6-18
 ** https://github.com/reeedstudio/xadow
 **
@@ -25,14 +25,13 @@
 
 void setup()
 {
+    Xadow.init();
 
-    Xadow.init();                               // init xadow
-    
-    Xadow.OLED.clearDisplay();                  // clear the screen and set start position to top left corner
-    Xadow.OLED.setNormalDisplay();              // Set display to normal mode (i.e non-inverse mode)
-    Xadow.OLED.setPageMode();                   // Set addressing mode to Page Mode
-    Xadow.OLED.setTextXY(0,0);                  // Set the cursor to Xth Page, Yth Column  
-    Xadow.OLED.putString("Hello World!");       // Print the String
+    Xadow.OLED.clearDisplay();           // clear the screen and set start position to top left corner
+    Xadow.OLED.setNormalDisplay();       // Set display to Normal mode
+    Xadow.OLED.setHorizontalMode();      // Set addressing mode to Horizontal Mode
+    Xadow.OLED.putString("!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");  //Print String (ASCII 32 - 126 )
+
 }
 
 void loop()

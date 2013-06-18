@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------------
-** demo xadow oled, draw seeedstudio logo
+** demo of xadow oled, horizontal addressing mode
 ** loovee 2013-6-18
 ** https://github.com/reeedstudio/xadow
 **
@@ -23,8 +23,7 @@
 #include "xadow.h"
 #include "xadowDfs.h"
 
-// seeedstudio logo here
-static unsigned char SeeedLogo[] PROGMEM ={
+static unsigned char SeeedLogo[] PROGMEM = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -93,11 +92,12 @@ static unsigned char SeeedLogo[] PROGMEM ={
 
 void setup()
 {
-    Xadow.init();                               // init xadow
-    
-    Xadow.OLED.setInverseDisplay();             // Set Display to inverse mode
-    Xadow.OLED.clearDisplay();                  // clear the screen and set start position to top left corner
-    Xadow.OLED.drawBitmap(SeeedLogo,1024);      // 1024 = 128 Pixels * 64 Pixels / 8
+    Xadow.init();
+
+    Xadow.OLED.clearDisplay();               // clear the screen and set start position to top left corner
+    Xadow.OLED.drawBitmap(SeeedLogo,1024);   // 1024 = 128 Pixels * 64 Pixels / 8
+    Xadow.OLED.setHorizontalScrollProperties(Scroll_Left,4,7,Scroll_5Frames);  //Set the properties of Horizontal Scrool
+    Xadow.OLED.activateScroll();             // Activate Scroll
 
 }
 
@@ -109,4 +109,3 @@ void loop()
 /*********************************************************************************************************
   END FILE
 *********************************************************************************************************/
-

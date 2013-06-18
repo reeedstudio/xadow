@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------------
-** demo xadow oled, draw seeedstudio logo
+** demo xadow oled, display driver test suite
 ** loovee 2013-6-18
 ** https://github.com/reeedstudio/xadow
 **
@@ -23,7 +23,6 @@
 #include "xadow.h"
 #include "xadowDfs.h"
 
-// seeedstudio logo here
 static unsigned char SeeedLogo[] PROGMEM ={
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -94,19 +93,98 @@ static unsigned char SeeedLogo[] PROGMEM ={
 void setup()
 {
     Xadow.init();                               // init xadow
-    
+}
+
+void setDisplayToOriginalState(char testCase)
+{
+    delay(5000);
+    Xadow.OLED.init();                           // initialze SEEED OLED display
+    Xadow.OLED.clearDisplay();                   // clear the screen and set start position to top left corner
+    Xadow.OLED.deactivateScroll();               // deactivete Scroll (might be activated by previous test case)
+    Xadow.OLED.setNormalDisplay();               // Non-inverted Display
+    Xadow.OLED.setPageMode();                    // Page mode to start with
+    Xadow.OLED.setTextXY(2,0);                   // 0 Page, 0th Column
+    Xadow.OLED.putString("Test Case ");
+    Xadow.OLED.putNumber(testCase);
+    Xadow.OLED.setTextXY(3,0);
+    Xadow.OLED.putString("Test Case ");
+    Xadow.OLED.putNumber(testCase);
+    Xadow.OLED.setTextXY(4,0);
+    Xadow.OLED.putString("Test Case ");
+    Xadow.OLED.putNumber(testCase);
+    Xadow.OLED.setTextXY(5,0);
+    Xadow.OLED.putString("Test Case ");
+    Xadow.OLED.putNumber(testCase);
+    delay(2000);
+
+}
+
+
+void loop()
+{
+
+    setDisplayToOriginalState(1);
+
+    Xadow.OLED.clearDisplay();                  // clear the screen and set start position to top left corner
+    Xadow.OLED.setNormalDisplay();              // Set display to normal mode (i.e non-inverse mode)
+    Xadow.OLED.setPageMode();                   // Set addressing mode to Page Mode
+    Xadow.OLED.setTextXY(0,0);                  // Set the cursor to Xth Page, Yth Column
+    Xadow.OLED.putString("Hello World!");       // Print the String
+
+
+    setDisplayToOriginalState(2);
+
+    Xadow.OLED.clearDisplay();                  // clear the screen and set start position to top left corner
+    Xadow.OLED.setNormalDisplay();              // Set display to Normal mode
+    Xadow.OLED.setPageMode();                   // Set addressing mode to Page Mode
+    Xadow.OLED.setTextXY(0,0);                  // Set the cursor to 0th Page, 0th Column
+    Xadow.OLED.putNumber(123);                  // Print number
+    Xadow.OLED.setTextXY(1,0);                  // Set the cursor to 1st Page, 0th Column
+    Xadow.OLED.putNumber(0xFFFF);               // Print number
+    Xadow.OLED.setTextXY(2,0);                  // Set the cursor to 2nd Page, 0th Column
+    Xadow.OLED.putNumber(0xFFFFFFFF);           // Print number
+    Xadow.OLED.setTextXY(3,0);                  // Set the cursor to 3rd Page, 0th Column
+    Xadow.OLED.putNumber(-12345);               // Print number
+
+
+    setDisplayToOriginalState(3);
+
+    Xadow.OLED.clearDisplay();                  // clear the screen and set start position to top left corner
+    Xadow.OLED.setNormalDisplay();              // Set display to Normal mode
+    Xadow.OLED.setHorizontalMode();             // Set addressing mode to Horizontal Mode
+    Xadow.OLED.putString("!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");  //Print String (ASCII 32 - 126 )
+
+
+
+    setDisplayToOriginalState(4);
+
+    Xadow.OLED.clearDisplay();                  // clear the screen and set start position to top left corner
+    Xadow.OLED.drawBitmap(SeeedLogo,1024);      // 1024 = 128 Pixels * 64 Pixels / 8
+
+    setDisplayToOriginalState(5);
+
     Xadow.OLED.setInverseDisplay();             // Set Display to inverse mode
     Xadow.OLED.clearDisplay();                  // clear the screen and set start position to top left corner
     Xadow.OLED.drawBitmap(SeeedLogo,1024);      // 1024 = 128 Pixels * 64 Pixels / 8
 
-}
+    setDisplayToOriginalState(6);
 
-void loop()
-{
-    // do nothing
+    Xadow.OLED.clearDisplay();                  // clear the screen and set start position to top left corner
+    Xadow.OLED.drawBitmap(SeeedLogo,1024);      // 1024 = 128 Pixels * 64 Pixels / 8
+    Xadow.OLED.setHorizontalScrollProperties(Scroll_Left,4,7,Scroll_5Frames); //Set Scrolling properties to Scroll Left
+    Xadow.OLED.activateScroll();                // Activate Scrolling
+    delay(5000);
+
+    setDisplayToOriginalState(7);
+
+    Xadow.OLED.clearDisplay();                  // clear the screen and set start position to top left corner
+    Xadow.OLED.drawBitmap(SeeedLogo,1024);      // 1024 = 128 Pixels * 64 Pixels / 8
+    Xadow.OLED.setHorizontalScrollProperties(Scroll_Right,4,7,Scroll_5Frames);  //Set the properties of Horizontal Scrool
+    Xadow.OLED.activateScroll();                // Activate Scroll
+    delay(5000);
+
 }
 
 /*********************************************************************************************************
   END FILE
 *********************************************************************************************************/
-
