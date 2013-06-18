@@ -24,11 +24,17 @@
 #define __XADOW_H__
 
 #include "xadowDfs.h"
+#include "oled_x.h"
 
 class xadow{
 
 private:
 
+public:
+
+#if EN_OLED
+    SeeedOLED OLED;
+#endif
 private:
 
 #if EN_BARO
