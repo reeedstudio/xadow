@@ -36,6 +36,7 @@ drawBitmap	KEYWORD2
 setHorizontalScrollProperties	KEYWORD2
 activateScroll	KEYWORD2
 deactivateScroll	KEYWORD2
+cout	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -47,3 +48,4 @@ THU	LITERAL1
 FRI	LITERAL1
 SAT	LITERAL1
 SUN	LITERAL1
+endl	LITERAL1

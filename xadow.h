@@ -49,10 +49,9 @@ private:
 public:
 
     void init();
-    void init_io();
     
 #if EN_BARO
-    long getBaro();                             // get barometer
+    long getBaro();                                     // get barometer
 #endif
 
 #if EN_ACC

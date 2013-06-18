@@ -25,17 +25,20 @@
 
 #define __Debug         1
 
+// enable of function, if you don't want some function, you can change
+// value of the folowing define
 #define EN_BARO         1
 #define EN_RTC          1
 #define EN_ACC          1
 #define EN_OLED         1
 #define EN_LED          1
 
+// I2C address
 #define ADDRBARO        0x77
 #define ADDRACC         0x53
 #define ADDRRTC         0x68
 
-// accel...
+// address for acceler...
 #define Register_ID     0
 #define Register_2D     0x2D
 #define Register_X0     0x32
@@ -45,7 +48,7 @@
 #define Register_Z0     0x36
 #define Register_Z1     0x37
 
-// rtc
+// week name of RTC
 #define MON 1
 #define TUE 2
 #define WED 3
