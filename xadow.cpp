@@ -57,9 +57,7 @@ void xadow::init_io()
 char xadow::bmp085Read(unsigned char address)
 {
     unsigned char data;
-    
-    cout << "read" << endl;
-    
+
     Wire.beginTransmission(ADDRBARO);
     Wire.write(address);
     Wire.endTransmission();
@@ -78,20 +76,16 @@ char xadow::bmp085Read(unsigned char address)
 int xadow::bmp085ReadInt(unsigned char address)
 {
     unsigned char msb, lsb;
-    
-    cout << "int" << endl;
-    
+
     Wire.beginTransmission(ADDRBARO);
     Wire.write(address);
     Wire.endTransmission();
     Wire.requestFrom(ADDRBARO, 2);
-    
-    cout << "int 2" << endl;
+
     while(Wire.available()<2);
     msb = Wire.read();
     lsb = Wire.read();
-    
-    cout << "int 3" << endl;
+
     return (int) msb<<8 | lsb;
 }
 #endif

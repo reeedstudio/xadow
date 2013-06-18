@@ -19,7 +19,7 @@ void setup()
 
 void loop()
 {
-    cout << Xadow.getBaro()/1000 << " kPa" << endl;
+    cout << (float)(Xadow.getBaro()/1000.0) << " kPa" << endl;
    
     cout << "hello" << endl;
     delay(500);

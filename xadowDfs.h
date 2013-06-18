@@ -26,11 +26,13 @@
 #define __Debug         1
 
 #define EN_BARO         1
-
-
-
+#define EN_RTC          1
+#define EN_ACC          1
+#define EN_OLED         1
+#define EN_LED          1
 
 #define ADDRBARO        0x77
+//#define ADDROLED        
 
 #endif
 /*********************************************************************************************************
