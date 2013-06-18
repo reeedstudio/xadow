@@ -20,10 +20,13 @@ void setup()
 double ax, ay, az;
 void loop()
 {
+
     Xadow.readAcc(&ax, &ay, &az);
     
     cout << "ax = " << ax << '\t';
-    delay(500);
+    cout << "ay = " << ay << '\t';
+    cout << "az = " << az << endl;
+    delay(100);
 }
 
 /*********************************************************************************************************
