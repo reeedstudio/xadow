@@ -36,6 +36,10 @@ private:
     int bmp085ReadInt(unsigned char address);
 #endif
 
+#if EN_ACC
+    void adxl_init();
+#endif
+
 public:
 
     void init();
@@ -43,6 +47,10 @@ public:
     
 #if EN_BARO
     long getBaro();                             // get barometer
+#endif
+
+#if EN_ACC
+    unsigned char readAcc(double *Xg, double *Yg, double *Zg);
 #endif
 };
 

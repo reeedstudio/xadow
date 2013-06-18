@@ -4,7 +4,7 @@
 
   Author:Loovee
   2013-6-17
- 
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
   License as published by the Free Software Foundation; either
@@ -33,8 +33,12 @@
 *********************************************************************************************************/
 void xadow::init()
 {
-#if EN_BARO
+#if EN_BARO || EN_ACC
     Wire.begin();
+#endif
+
+#if EN_ACC
+    adxl_init();
 #endif
 
 }
@@ -45,7 +49,7 @@ void xadow::init()
 *********************************************************************************************************/
 void xadow::init_io()
 {
-    
+
 }
 
 
@@ -170,6 +174,75 @@ long xadow::getBaro()
 
     return p;
 
+}
+#endif
+
+/*********************************************************************************************************
+** Function name:           adxl_init
+** Descriptions:            adxl_init
+*********************************************************************************************************/
+#if EN_ACC
+void xadow::adxl_init()
+{
+    //--------------X
+    Wire.beginTransmission(ADDRACC);
+    Wire.write(Register_2D);
+    Wire.write(8); //measuring enable
+    Wire.endTransmission(); // stop transmitting
+}
+#endif
+
+/*********************************************************************************************************
+** Function name:           readAcc
+** Descriptions:            readAcc
+*********************************************************************************************************/
+#if EN_ACC
+unsigned char xadow::readAcc(double *Xg, double *Yg, double *Zg)
+{
+    int X_out;
+    int Y_out;
+    int Z_out;
+    Wire.beginTransmission(ADDRACC); // transmit to device
+    Wire.write(Register_X0);
+    Wire.write(Register_X1);
+    Wire.endTransmission();
+    Wire.requestFrom(ADDRACC,2);
+    if(Wire.available()<=2)
+    {
+        int X0 = Wire.read();
+        int X1 = Wire.read();
+        X1=X1<<8;
+        X_out=X0+X1;
+    }
+    //------------------Y
+    Wire.beginTransmission(ADDRACC); // transmit to device
+    Wire.write(Register_Y0);
+    Wire.write(Register_Y1);
+    Wire.endTransmission();
+    Wire.requestFrom(ADDRACC,2);
+    if(Wire.available()<=2)
+    {
+        int Y0 = Wire.read();
+        int Y1 = Wire.read();
+        Y1=Y1<<8;
+        Y_out=Y0+Y1;
+    }
+    //------------------Z
+    Wire.beginTransmission(ADDRACC); // transmit to device
+    Wire.write(Register_Z0);
+    Wire.write(Register_Z1);
+    Wire.endTransmission();
+    Wire.requestFrom(ADDRACC,2);
+    if(Wire.available()<=2)
+    {
+        int Z0 = Wire.read();
+        int Z1 = Wire.read();
+        Z1=Z1<<8;
+        Z_out=Z0+Z1;
+    }
+    *Xg=X_out/256.0;
+    *Yg=Y_out/256.0;
+    *Zg=Z_out/256.0;
 }
 #endif
 

@@ -17,11 +17,12 @@ void setup()
     
 }
 
+double ax, ay, az;
 void loop()
 {
-    cout << (float)(Xadow.getBaro()/1000.0) << " kPa" << endl;
-   
-    cout << "hello" << endl;
+    Xadow.readAcc(&ax, &ay, &az);
+    
+    cout << "ax = " << ax << '\t';
     delay(500);
 }
 
