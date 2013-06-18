@@ -73,7 +73,6 @@ public:
 
 #if EN_VIB
     void setVibrator(long time);                    // time: ms, 0: forever
-    
 #endif
 };
 
