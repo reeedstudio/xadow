@@ -23,7 +23,14 @@
 #ifndef __XADOWDFS_H__
 #define __XADOWDFS_H__
 
+#define __Debug         1
 
+#define EN_BARO         1
+
+
+
+
+#define ADDRBARO        0x77
 
 #endif
 /*********************************************************************************************************

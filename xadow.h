@@ -23,16 +23,27 @@
 #ifndef __XADOW_H__
 #define __XADOW_H__
 
+#include "xadowDfs.h"
 
 class xadow{
 
 private:
 
+private:
+
+#if EN_BARO
+    char bmp085Read(unsigned char address);
+    int bmp085ReadInt(unsigned char address);
+#endif
 
 public:
 
     void init();
-   
+    void init_io();
+    
+#if EN_BARO
+    long getBaro();                             // get barometer
+#endif
 };
 
 extern xadow Xadow;
