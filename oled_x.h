@@ -25,8 +25,8 @@
 // SeeedOLED Instruction set addresses
 #include "Arduino.h"
 
-#define SeeedOLED_Max_X                     127    //128 Pixels
-#define SeeedOLED_Max_Y                     63    //64  Pixels
+#define SeeedOLED_Max_X                     127         //128 Pixels
+#define SeeedOLED_Max_Y                     63          //64  Pixels
 
 #define PAGE_MODE                           01
 #define HORIZONTAL_MODE                     02
