@@ -58,6 +58,11 @@ public:
 #if EN_ACC
     unsigned char readAcc(double *Xg, double *Yg, double *Zg);
 #endif
+
+#if EN_RTC
+    unsigned char setTime(unsigned char *dta);           // dta[] = {year, month, day, week, hour, min, sec};
+    unsigned char getTime(unsigned char *dta);           // as up
+#endif
 };
 
 extern xadow Xadow;

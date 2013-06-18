@@ -5,6 +5,10 @@
 #include "xadow.h"
 #include "xadowDfs.h"
 
+//unsigned char td[] = {13, 6, 18, TUE, 19, 21, 30};
+
+unsigned char td[7] = {0, 0, 0, 0, 0, 0, 0};
+
 void setup()
 {
     Serial.begin(115200);
@@ -15,17 +19,19 @@ void setup()
     cout << "hello world" << endl;
 
     Xadow.init();
+    
+   // Xadow.setTime(td);
+
 }
 
-double ax, ay, az;
+
 void loop()
 {
 
-    Xadow.OLED.clearDisplay();          //clear the screen and set start position to top left corner
-    Xadow.OLED.setNormalDisplay();      //Set display to normal mode (i.e non-inverse mode)
-    Xadow.OLED.setPageMode();           //Set addressing mode to Page Mode
-    Xadow.OLED.setTextXY(0,0);          //Set the cursor to Xth Page, Yth Column  
-    Xadow.OLED.putString("Hello World!"); //Print the String
+    Xadow.getTime(td);
+    delay(1000);
+    
+    cout << td[4] << ":" << td[5] << ":" << td[6] << endl;
     
 }
 

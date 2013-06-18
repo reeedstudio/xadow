@@ -33,7 +33,7 @@
 *********************************************************************************************************/
 void xadow::init()
 {
-#if EN_BARO || EN_ACC || EN_OLED
+#if EN_BARO || EN_ACC || EN_OLED || EN_RTC || EN_LED
     Wire.begin();
 #endif
 
@@ -190,8 +190,8 @@ void xadow::adxl_init()
     //--------------X
     Wire.beginTransmission(ADDRACC);
     Wire.write(Register_2D);
-    Wire.write(8); //measuring enable
-    Wire.endTransmission(); // stop transmitting
+    Wire.write(8);                          //measuring enable
+    Wire.endTransmission();                 // stop transmitting
 }
 #endif
 
@@ -205,7 +205,7 @@ unsigned char xadow::readAcc(double *Xg, double *Yg, double *Zg)
     int X_out;
     int Y_out;
     int Z_out;
-    Wire.beginTransmission(ADDRACC); // transmit to device
+    Wire.beginTransmission(ADDRACC);        // transmit to device
     Wire.write(Register_X0);
     Wire.write(Register_X1);
     Wire.endTransmission();
@@ -218,7 +218,7 @@ unsigned char xadow::readAcc(double *Xg, double *Yg, double *Zg)
         X_out=X0+X1;
     }
     //------------------Y
-    Wire.beginTransmission(ADDRACC); // transmit to device
+    Wire.beginTransmission(ADDRACC);        // transmit to device
     Wire.write(Register_Y0);
     Wire.write(Register_Y1);
     Wire.endTransmission();
@@ -231,7 +231,7 @@ unsigned char xadow::readAcc(double *Xg, double *Yg, double *Zg)
         Y_out=Y0+Y1;
     }
     //------------------Z
-    Wire.beginTransmission(ADDRACC); // transmit to device
+    Wire.beginTransmission(ADDRACC);        // transmit to device
     Wire.write(Register_Z0);
     Wire.write(Register_Z1);
     Wire.endTransmission();
@@ -246,6 +246,59 @@ unsigned char xadow::readAcc(double *Xg, double *Yg, double *Zg)
     *Xg=X_out/256.0;
     *Yg=Y_out/256.0;
     *Zg=Z_out/256.0;
+}
+#endif
+
+/*********************************************************************************************************
+** Function name:           readAcc
+** Descriptions:            dta[] = {year, month, day, week, hour, min, sec};
+*********************************************************************************************************/
+#if EN_RTC
+unsigned char decToBcd(unsigned char val)
+{
+	return ( (val/10*16) + (val%10) );
+}
+
+
+unsigned char bcdToDec(unsigned char val)
+{
+	return ( (val/16*10) + (val%16) );
+}
+
+unsigned char xadow::setTime(unsigned char *dta)
+{
+
+    Wire.beginTransmission(ADDRRTC);
+    Wire.write((unsigned char)0x00);
+    Wire.write(decToBcd(dta[6]));           // 0 to bit 7 starts the clock
+    Wire.write(decToBcd(dta[5]));
+    Wire.write(decToBcd(dta[4]));           // If you want 12 hour am/pm you need to set bit 6
+    Wire.write(decToBcd(dta[3]));
+    Wire.write(decToBcd(dta[2]));
+    Wire.write(decToBcd(dta[1]));
+    Wire.write(decToBcd(dta[0]));
+    Wire.endTransmission();
+    
+    return 1;
+}
+
+unsigned char xadow::getTime(unsigned char *dta)
+{
+    // Reset the register pointer
+	Wire.beginTransmission(ADDRRTC);
+	Wire.write((unsigned char)0x00);
+	Wire.endTransmission();  
+	Wire.requestFrom(ADDRRTC, 7);
+	// A few of these need masks because certain bits are control bits
+	dta[6]  = bcdToDec(Wire.read());
+	dta[5]  = bcdToDec(Wire.read());
+	dta[4]  = bcdToDec(Wire.read());        // Need to change this if 12 hour am/pm
+	dta[3]  = bcdToDec(Wire.read());
+	dta[2]  = bcdToDec(Wire.read());
+	dta[1]  = bcdToDec(Wire.read());
+	dta[0]  = bcdToDec(Wire.read());
+    
+    return 1;
 }
 #endif
 

@@ -33,9 +33,7 @@
 
 #define ADDRBARO        0x77
 #define ADDRACC         0x53
-//#define ADDROLED        
-
-
+#define ADDRRTC         0x68
 
 #if EN_ACC
 #define Register_ID 0
@@ -47,6 +45,15 @@
 #define Register_Z0 0x36
 #define Register_Z1 0x37
 #endif
+
+// rtc
+#define MON 1
+#define TUE 2
+#define WED 3
+#define THU 4
+#define FRI 5
+#define SAT 6
+#define SUN 7
 
 #endif
 /*********************************************************************************************************
