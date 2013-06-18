@@ -22,10 +22,15 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <Streaming.h>
 
+#include "debug_x.h"
+#include "TimerOne_x.h"
 #include "xadowDfs.h"
 #include "xadow.h"
+
+#if EN_VIB
+void timerIsr();
+#endif
 
 /*********************************************************************************************************
 ** Function name:           init
@@ -43,6 +48,15 @@ void xadow::init()
 
 #if EN_OLED
     OLED.init();
+#endif
+
+#if EN_VIB
+    flg_Vib = 0;
+    cnt_Vib = 0;
+    pinMode(PINVIB, OUTPUT);
+    digitalWrite(PINVIB, LOW);
+    Timer1.initialize(1000);
+    Timer1.attachInterrupt( timerIsr );
 #endif
 }
 
@@ -291,6 +305,43 @@ unsigned char xadow::getTime(unsigned char *dta)
     return 1;
 }
 #endif
+
+/*********************************************************************************************************
+** Function name:           setVibrator
+** Descriptions:            setVibrator, ms, 0, forever -1 stop
+*********************************************************************************************************/
+#if EN_VIB
+
+void timerIsr()
+{
+    Xadow.cnt_Vib = Xadow.cnt_Vib > 0 ? Xadow.cnt_Vib-1 : Xadow.cnt_Vib;
+
+    if(Xadow.flg_Vib && !Xadow.cnt_Vib)
+    {
+        Xadow.flg_Vib = 0;
+        digitalWrite(PINVIB, LOW);
+    }
+
+}
+
+void xadow::setVibrator(long time)
+{
+    if(MOVE == time)
+    {
+        time = 19890419;                // this is forever!!
+    }
+    else if(STOP ==  time)
+    {
+        time = 1;
+        digitalWrite(PINVIB, LOW);
+    }
+    flg_Vib = 1;
+    cnt_Vib = time;
+    digitalWrite(PINVIB, HIGH);
+}
+
+#endif
+
 
 xadow Xadow;
 

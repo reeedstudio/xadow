@@ -33,10 +33,8 @@
  *
  *  See Google Code project http://code.google.com/p/arduino-timerone/ for latest
  */
-#ifndef TIMERONE_cpp
-#define TIMERONE_cpp
 
-#include "TimerOne.h"
+#include "TimerOne_x.h"
 
 TimerOne Timer1;              // preinstatiate
 
@@ -204,5 +202,3 @@ unsigned long TimerOne::read()		//returns the value of the timer in microseconds
 	tmp = (  (tcnt1>tmp) ? (tmp) : (long)(ICR1-tcnt1)+(long)ICR1  );		// AR amended to add casts and reuse previous TCNT1
 	return ((tmp*1000L)/(F_CPU /1000L))<<scale;
 }
-
-#endif

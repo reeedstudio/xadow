@@ -33,13 +33,13 @@
  *
  *  See Google Code project http://code.google.com/p/arduino-timerone/ for latest
  */
-#ifndef TIMERONE_h
-#define TIMERONE_h
+#ifndef __TIMERONE_X_H__
+#define __TIMERONE_X_H__
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define RESOLUTION 65536    // Timer1 is 16 bit
+#define RESOLUTION 65536            // Timer1 is 16 bit
 
 class TimerOne
 {

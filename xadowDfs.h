@@ -32,6 +32,9 @@
 #define EN_ACC          1
 #define EN_OLED         1
 #define EN_LED          1
+#define EN_VIB          1
+
+#define PINVIB          13          // pin of Vibrator
 
 // I2C address
 #define ADDRBARO        0x77
@@ -56,6 +59,10 @@
 #define FRI 5
 #define SAT 6
 #define SUN 7
+
+// vibrator
+#define MOVE    0
+#define STOP    -1
 
 #endif
 /*********************************************************************************************************

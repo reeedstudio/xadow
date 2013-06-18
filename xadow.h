@@ -25,16 +25,24 @@
 
 #include "xadowDfs.h"
 #include "oled_x.h"
+#include "debug_x.h"
 
 class xadow{
 
 private:
 
+
 public:
+
+#if EN_VIB
+    unsigned char flg_Vib;
+    unsigned long cnt_Vib;
+#endif
 
 #if EN_OLED
     SeeedOLED OLED;
 #endif
+
 private:
 
 #if EN_BARO
@@ -61,6 +69,11 @@ public:
 #if EN_RTC
     unsigned char setTime(unsigned char *dta);           // dta[] = {year, month, day, week, hour, min, sec};
     unsigned char getTime(unsigned char *dta);           // as up
+#endif
+
+#if EN_VIB
+    void setVibrator(long time);                    // time: ms, 0: forever
+    
 #endif
 };
 
