@@ -54,10 +54,16 @@ void xadow::init()
     flg_Vib = 0;
     cnt_Vib = 0;
     DDRF |= 0x01;
-	DDRB |= 0x04;
+    DDRB |= 0x04;
     Timer1.initialize(1000);
     Timer1.attachInterrupt( timerIsr );
 #endif
+
+    // io of charge state
+    CHRGdir &=~ CHRGbit;
+    CHRGport |= CHRGbit;
+    DONEdir &=~ DONEbit;
+    DONEport |= DONEbit;
 }
 
 /*********************************************************************************************************
@@ -260,13 +266,13 @@ unsigned char xadow::readAcc(double *Xg, double *Yg, double *Zg)
 #if EN_RTC
 unsigned char decToBcd(unsigned char val)
 {
-	return ( (val/10*16) + (val%10) );
+    return ( (val/10*16) + (val%10) );
 }
 
 
 unsigned char bcdToDec(unsigned char val)
 {
-	return ( (val/16*10) + (val%16) );
+    return ( (val/16*10) + (val%16) );
 }
 
 unsigned char xadow::setTime(unsigned char *dta)
@@ -282,26 +288,26 @@ unsigned char xadow::setTime(unsigned char *dta)
     Wire.write(decToBcd(dta[1]));
     Wire.write(decToBcd(dta[0]));
     Wire.endTransmission();
-    
+
     return 1;
 }
 
 unsigned char xadow::getTime(unsigned char *dta)
 {
     // Reset the register pointer
-	Wire.beginTransmission(ADDRRTC);
-	Wire.write((unsigned char)0x00);
-	Wire.endTransmission();  
-	Wire.requestFrom(ADDRRTC, 7);
-	// A few of these need masks because certain bits are control bits
-	dta[6]  = bcdToDec(Wire.read());
-	dta[5]  = bcdToDec(Wire.read());
-	dta[4]  = bcdToDec(Wire.read());        // Need to change this if 12 hour am/pm
-	dta[3]  = bcdToDec(Wire.read());
-	dta[2]  = bcdToDec(Wire.read());
-	dta[1]  = bcdToDec(Wire.read());
-	dta[0]  = bcdToDec(Wire.read());
-    
+    Wire.beginTransmission(ADDRRTC);
+    Wire.write((unsigned char)0x00);
+    Wire.endTransmission();
+    Wire.requestFrom(ADDRRTC, 7);
+    // A few of these need masks because certain bits are control bits
+    dta[6]  = bcdToDec(Wire.read());
+    dta[5]  = bcdToDec(Wire.read());
+    dta[4]  = bcdToDec(Wire.read());        // Need to change this if 12 hour am/pm
+    dta[3]  = bcdToDec(Wire.read());
+    dta[2]  = bcdToDec(Wire.read());
+    dta[1]  = bcdToDec(Wire.read());
+    dta[0]  = bcdToDec(Wire.read());
+
     return 1;
 }
 #endif
@@ -337,7 +343,7 @@ void xadow::setVibrator(long time)
     }
     flg_Vib = 1;
     cnt_Vib = time;
-    
+
     PORTB |= 0x04;      // move
     PORTF |= 0x01;
 }
@@ -355,7 +361,7 @@ int xadow::getAnalog(int pin)
     {
         sum += analogRead(pin);
     }
-    
+
     return sum>>5;
 }
 
@@ -378,8 +384,19 @@ float xadow::getBatVol()
 **                          CHARGING        1
 **                          CHARGDONE       2
 *********************************************************************************************************/
-unsigned char getChrgState()
+unsigned char xadow::getChrgState()
 {
+    unsigned char Temp = CHRGpin & CHRGbit;
+    
+    if(!Temp)
+    {
+        return NOCHARGE;
+    }
+    Temp = DONEpin & DONEbit;
+    if(!Temp)
+    {
+        return CHARGDONE;
+    }
     return NOCHARGE;
 }
 

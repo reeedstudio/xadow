@@ -44,6 +44,16 @@
 #define PINCHRGDONE     A3
 #define PINCHRGING      A2
 
+// about charge
+#define CHRGbit 0x10
+#define DONEbit 0x20
+#define CHRGdir DDRF
+#define DONEdir DDRF
+#define CHRGpin PINF
+#define DONEpin PINF
+#define CHRGport PORTF
+#define DONEport PORTF
+
 // charge state
 #define NOCHARGE        0
 #define CHARGING        1
