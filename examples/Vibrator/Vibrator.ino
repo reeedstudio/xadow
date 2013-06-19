@@ -21,24 +21,34 @@
 
 #include "xadow.h"
 
+void vibrate(unsigned char OnOff)
+{
+    if(OnOff)
+    {
+        PORTB |= 0x04;
+        PORTF |= 0x01;
+    }
+    else
+    {
+        PORTB &=~ 0x04;
+        PORTF &=~ 0x01;
+    }
+}
 
 void setup()
 {
-
     Xadow.init();
-    delay(500);
-   
-    Xadow.setVibrator(MOVE);            // move 
-    delay(1000);
-    Xadow.setVibrator(STOP);            // stop
-    delay(500);
-    Xadow.setVibrator(300);             // move for 2000ms
 
+    DDRF |= 0x01;                   // init IO
+    DDRB |= 0x04;
 }
 
 void loop()
 {
-    // do nothing
+    vibrate(1);                     // ON
+    delay(500);
+    vibrate(0);                     // OFF
+    delay(500);
 }
 
 /*********************************************************************************************************

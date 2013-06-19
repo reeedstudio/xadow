@@ -5,50 +5,19 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-oled_x	KEYWORD1
 xadow	KEYWORD1
 xadowDfs	KEYWORD1
 Xadow	KEYWORD1
-OLED	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 init	KEYWORD2
-getBaro	KEYWORD2
-readAcc	KEYWORD2
-setTime	KEYWORD2
-getTime	KEYWORD2
-setNormalDisplay	KEYWORD2
-setInverseDisplay	KEYWORD2
-sendCommand	KEYWORD2
-sendData	KEYWORD2
-setPageMode	KEYWORD2
-setHorizontalMode	KEYWORD2
-setTextXY	KEYWORD2
-clearDisplay	KEYWORD2
-setBrightness	KEYWORD2
-putChar	KEYWORD2
-putString	KEYWORD2
-putNumber	KEYWORD2
-putFloat	KEYWORD2
-drawBitmap	KEYWORD2
-setHorizontalScrollProperties	KEYWORD2
-activateScroll	KEYWORD2
-deactivateScroll	KEYWORD2
 cout	KEYWORD2
-setVibrator	KEYWORD2
+getBatVol	KEYWORD2
+getChrgState	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
-MON	LITERAL1
-TUE	LITERAL1
-WED	LITERAL1
-THU	LITERAL1
-FRI	LITERAL1
-SAT	LITERAL1
-SUN	LITERAL1
 endl	LITERAL1
-MOVE	LITERAL1
-STOP	LITERAL1

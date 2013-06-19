@@ -24,6 +24,38 @@
 #include "xadow.h"
 #include "xadowDfs.h"
 
+#define ADDRRTC         0x68
+
+#define MON 1
+#define TUE 2
+#define WED 3
+#define THU 4
+#define FRI 5
+#define SAT 6
+#define SUN 7
+
+unsigned char decToBcd(unsigned char val)
+{
+    return ( (val/10*16) + (val%10) );
+}
+
+unsigned char setTime(unsigned char *dta)
+{
+
+    Wire.beginTransmission(ADDRRTC);
+    Wire.write((unsigned char)0x00);
+    Wire.write(decToBcd(dta[6]));           // 0 to bit 7 starts the clock
+    Wire.write(decToBcd(dta[5]));
+    Wire.write(decToBcd(dta[4]));           // If you want 12 hour am/pm you need to set bit 6
+    Wire.write(decToBcd(dta[3]));
+    Wire.write(decToBcd(dta[2]));
+    Wire.write(decToBcd(dta[1]));
+    Wire.write(decToBcd(dta[0]));
+    Wire.endTransmission();
+
+    return 1;
+}
+
 unsigned char td[] = {13, 6, 18, TUE, 19, 21, 30};      // set time here: year, month ,day, week, hour, minute, second
 
 void setup()
@@ -32,13 +64,11 @@ void setup()
     
     while(!Serial);
 
-    Xadow.init();
-    
-    Xadow.setTime(td);
+    Xadow.init();                                       // init xadow
+    Wire.begin();                                       // init I2C
+    setTime(td);                                        // set Time
     cout << "set time over !" << endl;
-
 }
-
 
 void loop()
 {
