@@ -39,6 +39,16 @@
 #define ADDRACC         0x53
 #define ADDRRTC         0x68
 
+// PIN define
+#define PINBAT          A4
+#define PINCHRGDONE     A3
+#define PINCHRGING      A2
+
+// charge state
+#define NOCHARGE        0
+#define CHARGING        1
+#define CHARGDONE       2
+
 // address for acceler...
 #define Register_ID     0
 #define Register_2D     0x2D

@@ -344,6 +344,44 @@ void xadow::setVibrator(long time)
 
 #endif
 
+/*********************************************************************************************************
+** Function name:           getAnalog
+** Descriptions:            getAnalog
+*********************************************************************************************************/
+int xadow::getAnalog(int pin)
+{
+    int sum = 0;
+    for(int i=0; i<32; i++)
+    {
+        sum += analogRead(pin);
+    }
+    
+    return sum>>5;
+}
+
+/*********************************************************************************************************
+** Function name:           getBatVol
+** Descriptions:            get voltage of battery
+*********************************************************************************************************/
+float xadow::getBatVol()
+{
+    float vol = 0;
+    vol = getAnalog(PINBAT);
+    vol = vol/1023.0*3.3*2;
+    return vol;
+}
+
+/*********************************************************************************************************
+** Function name:           getChrgState
+** Descriptions:            get state of charge:
+**                          NOCHARGE        0
+**                          CHARGING        1
+**                          CHARGDONE       2
+*********************************************************************************************************/
+unsigned char getChrgState()
+{
+    return NOCHARGE;
+}
 
 xadow Xadow;
 

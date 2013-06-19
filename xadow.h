@@ -54,6 +54,8 @@ private:
     void adxl_init();
 #endif
 
+    int getAnalog(int pin);
+
 public:
 
     void init();
@@ -72,8 +74,11 @@ public:
 #endif
 
 #if EN_VIB
-    void setVibrator(long time);                    // time: ms, 0: forever
+    void setVibrator(long time);                        // time: ms, 0: forever
 #endif
+
+    float getBatVol();                                  // read voltage of battery
+    unsigned char getChrgState();                       // get charge state: 
 };
 
 extern xadow Xadow;
