@@ -41,6 +41,7 @@ void loop()
         case NOCHARGE:
         
         cout << "no charge" << endl;
+        
         break;
         
         case CHARGING:
