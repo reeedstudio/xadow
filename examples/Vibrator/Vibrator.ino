@@ -21,13 +21,11 @@
 
 #include "xadow.h"
 
+
 void setup()
 {
 
     Xadow.init();
-    
-    delay(500);
-    
     delay(500);
    
     Xadow.setVibrator(MOVE);            // move 
@@ -36,12 +34,11 @@ void setup()
     delay(500);
     Xadow.setVibrator(300);             // move for 2000ms
 
-
 }
 
 void loop()
 {
-    // do nothing here
+
 }
 
 /*********************************************************************************************************

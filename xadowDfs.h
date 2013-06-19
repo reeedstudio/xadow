@@ -34,8 +34,6 @@
 #define EN_LED          1
 #define EN_VIB          1
 
-#define PINVIB          13          // pin of Vibrator
-
 // I2C address
 #define ADDRBARO        0x77
 #define ADDRACC         0x53

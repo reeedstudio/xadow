@@ -53,8 +53,8 @@ void xadow::init()
 #if EN_VIB
     flg_Vib = 0;
     cnt_Vib = 0;
-    pinMode(PINVIB, OUTPUT);
-    digitalWrite(PINVIB, LOW);
+    DDRF |= 0x01;
+	DDRB |= 0x04;
     Timer1.initialize(1000);
     Timer1.attachInterrupt( timerIsr );
 #endif
@@ -319,7 +319,8 @@ void timerIsr()
     if(Xadow.flg_Vib && !Xadow.cnt_Vib)
     {
         Xadow.flg_Vib = 0;
-        digitalWrite(PINVIB, LOW);
+        PORTB &=~ 0x04;
+        PORTF &=~ 0x01;
     }
 
 }
@@ -333,11 +334,12 @@ void xadow::setVibrator(long time)
     else if(STOP ==  time)
     {
         time = 1;
-        digitalWrite(PINVIB, LOW);
     }
     flg_Vib = 1;
     cnt_Vib = time;
-    digitalWrite(PINVIB, HIGH);
+    
+    PORTB |= 0x04;      // move
+    PORTF |= 0x01;
 }
 
 #endif
