@@ -24,59 +24,17 @@
 #define __XADOW_H__
 
 #include "xadowDfs.h"
-#include "oled_x.h"
 #include "debug_x.h"
 
 class xadow{
 
 private:
 
-
-public:
-
-#if EN_VIB
-    unsigned char flg_Vib;
-    unsigned long cnt_Vib;
-#endif
-
-#if EN_OLED
-    SeeedOLED OLED;
-#endif
-
-private:
-
-#if EN_BARO
-    char bmp085Read(unsigned char address);
-    int bmp085ReadInt(unsigned char address);
-#endif
-
-#if EN_ACC
-    void adxl_init();
-#endif
-
     int getAnalog(int pin);
 
 public:
 
     void init();
-    
-#if EN_BARO
-    long getBaro();                                     // get barometer
-#endif
-
-#if EN_ACC
-    unsigned char readAcc(double *Xg, double *Yg, double *Zg);
-#endif
-
-#if EN_RTC
-    unsigned char setTime(unsigned char *dta);           // dta[] = {year, month, day, week, hour, min, sec};
-    unsigned char getTime(unsigned char *dta);           // as up
-#endif
-
-#if EN_VIB
-    void setVibrator(long time);                        // time: ms, 0: forever
-#endif
-
     float getBatVol();                                  // read voltage of battery
     unsigned char getChrgState();                       // get charge state: 
 };

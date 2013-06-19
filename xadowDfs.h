@@ -25,20 +25,6 @@
 
 #define __Debug         1
 
-// enable of function, if you don't want some function, you can change
-// value of the folowing define
-#define EN_BARO         1
-#define EN_RTC          1
-#define EN_ACC          1
-#define EN_OLED         1
-#define EN_LED          1
-#define EN_VIB          1
-
-// I2C address
-#define ADDRBARO        0x77
-#define ADDRACC         0x53
-#define ADDRRTC         0x68
-
 // PIN define
 #define PINBAT          A4
 #define PINCHRGDONE     A3
@@ -58,29 +44,6 @@
 #define NOCHARGE        0
 #define CHARGING        1
 #define CHARGDONE       2
-
-// address for acceler...
-#define Register_ID     0
-#define Register_2D     0x2D
-#define Register_X0     0x32
-#define Register_X1     0x33
-#define Register_Y0     0x34
-#define Register_Y1     0x35
-#define Register_Z0     0x36
-#define Register_Z1     0x37
-
-// week name of RTC
-#define MON 1
-#define TUE 2
-#define WED 3
-#define THU 4
-#define FRI 5
-#define SAT 6
-#define SUN 7
-
-// vibrator
-#define MOVE    0
-#define STOP    -1
 
 #endif
 /*********************************************************************************************************
