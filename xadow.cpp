@@ -39,6 +39,11 @@ void xadow::init()
     CHRGport |= CHRGbit;
     DONEdir &=~ DONEbit;
     DONEport |= DONEbit;
+    
+    rLEDport |= rLEDbit;
+    gLEDport |= gLEDbit;
+    rLEDdir |= rLEDbit;
+    gLEDdir |= gLEDbit;
 }
 
 /*********************************************************************************************************
@@ -113,8 +118,8 @@ void xadow::pwrDown(unsigned long tSleep)
 }
 
 /*********************************************************************************************************
-** Function name:           pwrDown
-** Descriptions:            pwrDown
+** Function name:           wakeUp
+** Descriptions:            wakeUp
 *********************************************************************************************************/
 void xadow::wakeUp()
 {
@@ -129,6 +134,47 @@ void xadow::wakeUp()
     power_usart1_enable();
     power_usb_enable();
 #endif
+}
+
+/*********************************************************************************************************
+** Function name:           greenLed
+** Descriptions:            green Led drive
+*********************************************************************************************************/
+void xadow::greenLed(unsigned char state)
+{
+    if(LEDOFF == state)
+    {
+        gLEDport |= gLEDbit;
+    }
+    else if(LEDON == state)
+    {
+        gLEDport &=~ gLEDbit;
+    }
+    else if(LEDCHG == state)
+    {
+        gLEDport ^= gLEDbit;
+    }
+
+}
+
+/*********************************************************************************************************
+** Function name:           redLed
+** Descriptions:            red Led drive
+*********************************************************************************************************/
+void xadow::redLed(unsigned char state)
+{
+    if(LEDOFF == state)
+    {
+        rLEDport |= rLEDbit;
+    }
+    else if(LEDON == state)
+    {
+        rLEDport &=~ rLEDbit;
+    }
+    else if(LEDCHG == state)
+    {
+        rLEDport ^= rLEDbit;
+    }
 }
 
 xadow Xadow;

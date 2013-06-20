@@ -41,6 +41,8 @@ public:
     unsigned char getChrgState();                       // get charge state: 
     void pwrDown(unsigned long tSleep);                 // power down, tSleep ms
     void wakeUp();                                      // wake up
+    void greenLed(unsigned char state);                 // green Led drive
+    void redLed(unsigned char state);                   // red led drive
 };
 
 extern xadow Xadow;

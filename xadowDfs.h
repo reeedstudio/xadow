@@ -40,10 +40,25 @@
 #define CHRGport PORTF
 #define DONEport PORTF
 
+// led pin or reg
+#define rLEDbit  0x01
+#define gLEDbit  0x80
+#define rLEDdir  DDRB
+#define gLEDdir  DDRB
+#define rLEDport PORTB
+#define gLEDport PORTB
+#define rLEDpin  PINB
+#define gLEDpin  PINB
+
 // charge state
 #define NOCHARGE        0
 #define CHARGING        1
 #define CHARGDONE       2
+
+// led state
+#define LEDON              1            // led on
+#define LEDOFF             2            // led off
+#define LEDCHG             3            // change led state
 
 #endif
 /*********************************************************************************************************

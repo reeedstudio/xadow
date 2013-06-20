@@ -26,17 +26,15 @@ void setup()
     Xadow.init();
 }
 
+
 void loop()
 {
     Xadow.greenLed(1);              // green led on
-    delay(3000);
+    Xadow.redLed(0);                // red led off
+    delay(200);
+    Xadow.redLed(1);                // red led on
     Xadow.greenLed(0);              // green led off
-    delay(3000);
-    Xadow.greenLed(1);
-    delay(20);
-    Xadow.greenLed(0);
-    gLEDport ^= gLEDbit;
-    delay(3000);
+    delay(200);
 }
 
 /*********************************************************************************************************
