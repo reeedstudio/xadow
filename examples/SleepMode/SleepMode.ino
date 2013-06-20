@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------------------------
-** demo of Vibrator
+** demo of sleep mdoe
 ** loovee 2013-6-18
 ** https://github.com/reeedstudio/xadow
 **
@@ -21,33 +21,25 @@
 
 #include "xadow.h"
 
-void vibrate(unsigned char OnOff)
-{
-    if(OnOff)
-    {
-        PORTB |= 0x04;
-        PORTF |= 0x01;
-    }
-    else
-    {
-        PORTB &=~ 0x04;
-        PORTF &=~ 0x01;
-    }
-}
 
 void setup()
 {
+
+    Serial.begin(115200);
+    // while(!Serial);
     Xadow.init();
-    DDRF |= 0x01;                   // init IO
-    DDRB |= 0x04;
+    
+    delay(2000);
+    cout << "init over" << endl;
 }
 
 void loop()
 {
-    vibrate(1);                     // ON
-    delay(500);
-    vibrate(0);                     // OFF
-    delay(500);
+    cout << "begin to sleep for 1s" << endl;
+    Xadow.pwrDown(1000);                        // sleep for 1000ms
+    Xadow.wakeUp();                             // wake up
+    cout << "wake up" << endl;
+    delay(500);                                 // delay 500 ms
 }
 
 /*********************************************************************************************************

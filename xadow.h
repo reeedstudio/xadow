@@ -25,18 +25,22 @@
 
 #include "xadowDfs.h"
 #include "debug_x.h"
+#include "Sleep_x.h"
 
 class xadow{
 
 private:
 
     int getAnalog(int pin);
+    Sleep sleep;
 
 public:
 
     void init();
     float getBatVol();                                  // read voltage of battery
     unsigned char getChrgState();                       // get charge state: 
+    void pwrDown(unsigned long tSleep);                 // power down, tSleep ms
+    void wakeUp();                                      // wake up
 };
 
 extern xadow Xadow;
