@@ -5,10 +5,10 @@ Written by Loovee, distributed under LGPL, for more information, please visit ht
 
 This library is written for manage Xadow, include :
 
-*user led
-*charge state read
-*battery voltage read
-*sleep mode operation
+* user led
+* charge state read
+* battery voltage read
+* sleep mode operation
 
 ### ≥ı ºªØ
 		void init();
