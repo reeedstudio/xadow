@@ -23,12 +23,12 @@
 #ifndef __XADOWDFS_H__
 #define __XADOWDFS_H__
 
-#define __Debug         1
+#define __Debug             1
 
 // PIN define
-#define PINBAT          A4
-#define PINCHRGDONE     A3
-#define PINCHRGING      A2
+#define PINBAT              A4
+#define PINCHRGDONE         A3
+#define PINCHRGING          A2
 
 // about charge
 #define CHRGbit 0x10
@@ -51,14 +51,14 @@
 #define gLEDpin  PINB
 
 // charge state
-#define NOCHARGE        0
-#define CHARGING        1
-#define CHARGDONE       2
+#define NOCHARGE            0
+#define CHARGING            1
+#define CHARGDONE           2
 
 // led state
-#define LEDON              1            // led on
-#define LEDOFF             2            // led off
-#define LEDCHG             3            // change led state
+#define LEDON               1               // led on
+#define LEDOFF              2               // led off
+#define LEDCHG              3               // change led state
 
 #endif
 /*********************************************************************************************************
