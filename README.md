@@ -29,7 +29,7 @@ it'll return the folowing value:
 		#define CHARGING            1
 		#define CHARGDONE           2
 		
-## User Led
+### User Led
 there'are two user led that you can use, a green one and a read one.
 		void greenLed(unsigned char state);	// green Led drive
 		void redLed(unsigned char state);   		// red led drive
@@ -40,7 +40,7 @@ about the input value, you can use:
 		#define LEDOFF              2               	// led off
 		#define LEDCHG              3               	// change led state		
 
-## Power Manage
+### Power Manage
 of curse, sometimes you want your xadow goto sleep to save some power, then you can use this function:
 
 		void pwrDown(unsigned long tSleep);             // power down, tSleep ms
@@ -125,3 +125,9 @@ there'are some application here, for more applicaton you can refer to examples
 			Xadow.greenLed(0);              // green led off
 			delay(200);
 		}
+		
+
+Others
+--------------------------------------------------------------------
+
+	anymore problem, please send me email: luweicong@seeedstudio.com
