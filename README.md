@@ -56,9 +56,9 @@ there'are some application here, for more applicaton you can refer to examples
 
 ### POWER DOWN MODE
 
-#include <Wire.h>
+		#include <Wire.h>
 
-#include "xadow.h"
+		#include "xadow.h"
 
 		void setup()
 		{
