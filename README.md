@@ -10,10 +10,10 @@ This library is written for manage Xadow, include :
 *battery voltage read
 *sleep mode operation
 
-###初始化
+### 初始化
 		void init();
 
-###读取电池电压
+### 读取电池电压
 		float getBatVol();
 
 
