@@ -43,9 +43,9 @@ about the input value, you can use:
 ## Power Manage
 of curse, sometimes you want your xadow goto sleep to save some power, then you can use this function:
 
-		void pwrDown(unsigned long tSleep);		// power down, tSleep ms
+		void pwrDown(unsigned long tSleep);             // power down, tSleep ms
 
 it'll let your xadow goto sleep for sSleep ms, then it'll wake, you shourld use the folowing function to awake it:
 
-		void wakeUp();					// wake up
+		void wakeUp();                                  // wake up
 
