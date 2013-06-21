@@ -1,4 +1,4 @@
-xadow
+XADOW
 ========================================================================================================
 
 Written by Loovee, distributed under LGPL, for more information, please visit http://www.seeedstudio.com
@@ -10,7 +10,7 @@ This library is written for manage Xadow, include :
 * battery voltage read
 * sleep mode operation
 
-function
+FUNCTION
 -------------------------------------------------------------------------------------------------------------------
 you can use the folowing function, it's useful in some way.
 
@@ -50,7 +50,7 @@ it'll let your xadow goto sleep for sSleep ms, then it'll wake, you shourld use 
 	void wakeUp();                                  // wake up
 
 
-some application
+APPLICATION
 -------------------------------------------------------------------------------------------------------------------
 there'are some application here, for more applicaton you can refer to examples
 
@@ -127,7 +127,7 @@ there'are some application here, for more applicaton you can refer to examples
 	}
 		
 
-Others
+OTHERS
 --------------------------------------------------------------------
 
-anymore problem, please send me email: luweicong@seeedstudio.com
+anymore problem, please send me a email: luweicong@seeedstudio.com
