@@ -1,5 +1,5 @@
 xadow
-================
+========================================================================================================
 
 Written by Loovee, distributed under LGPL, for more information, please visit http://www.seeedstudio.com
 
@@ -11,7 +11,7 @@ This library is written for manage Xadow, include :
 * sleep mode operation
 
 function
-------------------
+-------------------------------------------------------------------------------------------------------------------
 you can use the folowing function, it's useful in some way.
 
 ### Initialization
@@ -49,3 +49,79 @@ it'll let your xadow goto sleep for sSleep ms, then it'll wake, you shourld use 
 
 		void wakeUp();                                  // wake up
 
+
+some application
+-------------------------------------------------------------------------------------------------------------------
+there'are some application here, for more applicaton you can refer to examples
+
+### POWER DOWN MODE
+
+#include <Wire.h>
+
+#include "xadow.h"
+
+		void setup()
+		{
+
+			Serial.begin(115200);
+			// while(!Serial);
+			Xadow.init();
+			
+			delay(2000);
+			cout << "init over" << endl;
+		}
+
+		void loop()
+		{
+			cout << "begin to sleep for 1s" << endl;
+			Xadow.pwrDown(1000);                        // sleep for 1000ms
+			Xadow.wakeUp();                             // wake up
+			cout << "wake up" << endl;
+			delay(500);                                 // delay 500 ms
+		}
+
+
+### READ VOLTAGE OF BATTERY
+
+		#include <Wire.h>
+
+		#include "xadow.h"
+
+		void setup()
+		{
+			Serial.begin(115200);
+			
+			while(!Serial);
+			Xadow.init();
+			
+			delay(1000);
+			cout << "init over" << endl;
+		}
+
+		void loop()
+		{
+			cout << "vol: " << Xadow.getBatVol() << endl;
+			delay(500);
+		}
+
+### USER LED
+
+		#include <Wire.h>
+
+		#include "xadow.h"
+
+		void setup()
+		{
+			Xadow.init();
+		}
+
+
+		void loop()
+		{
+			Xadow.greenLed(1);              // green led on
+			Xadow.redLed(0);                // red led off
+			delay(200);
+			Xadow.redLed(1);                // red led on
+			Xadow.greenLed(0);              // green led off
+			delay(200);
+		}
