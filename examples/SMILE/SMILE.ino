@@ -93,8 +93,8 @@ void adxl_init()
 
 void oled_init()
 {
-    SeeedOled.init();                       //initialze SEEED OLED display
-    SeeedOled.setTextXY(0,0);               //Set the cursor to Xth Page, Yth Column
+    SeeedOled.init();                               // initialze SEEED OLED display
+    SeeedOled.setTextXY(0,0);                       // Set the cursor to Xth Page, Yth Column
 
 }
 
@@ -206,7 +206,7 @@ long bmp085GetTempPres()
 unsigned char getAcc()
 {
     int x, y, z;
-    adxl.readXYZ(&x, &y, &z);   //read the accelerometer values and store them in variables  x,y,z
+    adxl.readXYZ(&x, &y, &z);                           //read the accelerometer values
 
     x = abs(x);
     y = abs(y);
@@ -224,15 +224,15 @@ unsigned char getAcc()
 void dispSmile()
 {
     // add code here, smile
-    //SeeedOled.setInverseDisplay();          // Set Display to inverse mode
+    //SeeedOled.setInverseDisplay();                    // Set Display to inverse mode
     SeeedOled.clearDisplay();
-    SeeedOled.drawBitmap(SeeedLogo,1024);   // 1024 = 128 Pixels * 64 Pixels / 8
+    SeeedOled.drawBitmap(SeeedLogo,1024);               // 1024 = 128 Pixels * 64 Pixels / 8
 }
 
 void dispPress(long press)
 {
 
-    SeeedOled.setTextXY(3,4);          //Set the cursor to Xth Page, Yth Column
+    SeeedOled.setTextXY(3,4);                           // Set the cursor to Xth Page, Yth Column
     
     float fPress = press/1000.0;
     
@@ -295,12 +295,10 @@ void stateMachine()
         case STSMILE:
 
         dispSmile();
-        //cout << "smile"<<endl;
         delay(1000);
-        //cout << "out smile"<<endl;
         state = STIDLE;
         
-        SeeedOled.clearDisplay();       // clear oled
+        SeeedOled.clearDisplay();                               // clear oled
 
         break;
 

@@ -121,18 +121,16 @@ void vibrate(unsigned char OnOff)
 
 void ADXL(void)
 {
-#define sen 1
 
     double Xg, Yg, Zg;
-    
     
     static float tempGL=0;
     static float tempGH=0;
     unsigned char vib=0;
     readAcc(&Xg, &Yg, &Zg);//get new Acc
     
-    tempGL = Xg-sen;
-    tempGH = Xg+sen;
+    tempGL = Xg-1;
+    tempGH = Xg+1;
     if((lastXg>tempGH)||(lastXg<tempGL))
     {
         lastXg=Xg;
@@ -144,8 +142,8 @@ void ADXL(void)
         vib|=0x01;
     }
 
-    tempGL = Yg-sen;
-    tempGH = Yg+sen;
+    tempGL = Yg-1;
+    tempGH = Yg+1;
     if((lastYg>tempGH)||(lastYg<tempGL))
     {
         lastYg=Yg;
@@ -157,8 +155,8 @@ void ADXL(void)
         vib|=0x02;
     }
 
-    tempGL = Zg-sen;
-    tempGH = Zg+sen;
+    tempGL = Zg-1;
+    tempGH = Zg+1;
     if((lastZg>tempGH)||(lastZg<tempGL))
     {
         lastZg=Zg;
@@ -187,6 +185,7 @@ void ADXL(void)
     delay(100);
     vibrate(0);
 }
+
 void setup(void)
 {
     Wire.begin();
