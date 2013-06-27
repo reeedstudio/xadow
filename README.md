@@ -31,8 +31,8 @@ it'll return the folowing value:
 		
 ### User Led
 there'are two user led that you can use, a green one and a read one.
-	void greenLed(unsigned char state);	// green Led drive
-	void redLed(unsigned char state);   		// red led drive
+	void greenLed(unsigned char state);	            // green Led drive
+	void redLed(unsigned char state);               // red led drive
 		
 about the input value, you can use:
 
