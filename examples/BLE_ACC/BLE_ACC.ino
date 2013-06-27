@@ -19,7 +19,6 @@
 **--------------------------------------------------------------------------------*/
 #include <Wire.h>
 #include <SeeedOLED.h>
-#include <avr/pgmspace.h>
 
 #include "xadow.h"
 
@@ -42,7 +41,7 @@ void adxl_init()
 {
     Wire.beginTransmission(ADDRACC);
     Wire.write(Register_2D);
-    Wire.write(8);                                              //measuring enable
+    Wire.write(8);                                              // measuring enable
     Wire.endTransmission();                                     // stop transmitting
 }
 
@@ -199,6 +198,8 @@ void setup(void)
     
     DDRF |= 0x01;
     DDRB |= 0x04;                                   //vibrator io init
+	
+	Xadow.init();
 }
 
 void loop(void)
@@ -224,14 +225,60 @@ void loop(void)
     {
         count=0;
         dispBat();
-        Xadow.greenLed(LEDON);
-        delay(50);
-        Xadow.greenLed(LEDOFF);
     }
     count++;
     ADXL();
+	
+	BluetoothDtaProc();
+	
 }
 
+
+bool cmpLvc(char *a, char *b, int len)
+{
+	if(!a || !b)return 0;
+	for(int i = 0; i<len; i++)
+	{
+		if(a[i] == b[i])continue;
+		else return 0;
+	}
+	return 1;
+}
+// you can send "LEDON" and "LEDOFF" to control the green LED on main board
+void BluetoothDtaProc()
+{
+	char getDta 		= 0;
+	unsigned char len 	= 0;
+	char dta[20];
+	while(Serial1.available())
+	{
+		char c = Serial1.read();
+		
+		dta[len++] = c;
+		getDta = 1;
+	}
+	
+	if(getDta)
+	{
+		//if(len == 5 && dta[0] == 'L' && dta[1] == 'E' && dta[2] == 'D' && dta[3] == 'O' && dta[4] == 'N')
+		if(len == 5 && (cmpLvc(dta, "ledon", len) || cmpLvc(dta, "LEDON", len)))
+		{
+			Serial1.println("LEDON");
+			Xadow.greenLed(LEDON);
+		}
+		//else if(len == 6 && dta[0] == 'L' && dta[1] == 'E' && dta[2] == 'D' && dta[3] == 'O' && dta[4] == 'F' && dta[5] == 'F')
+		if(len == 6 && (cmpLvc(dta, "ledoff", len) || cmpLvc(dta, "LEDOFF", len)))
+		{
+			Serial1.println("LEDOFF");
+			Xadow.greenLed(LEDOFF);
+		}
+		else 
+		{
+			Serial1.println("OK");
+		}
+		getDta = 0;
+	}
+}
 /*********************************************************************************************************
   END FILE
 *********************************************************************************************************/

@@ -29,11 +29,11 @@ void setup()
 
 void loop()
 {
-    Xadow.greenLed(1);              // green led on
-    Xadow.redLed(0);                // red led off
+    Xadow.greenLed(LEDON);              	// green led on
+   // Xadow.redLed(LEDOFF);                	// red led off
     delay(200);
-    Xadow.redLed(1);                // red led on
-    Xadow.greenLed(0);              // green led off
+   // Xadow.redLed(LEDON);                	// red led on
+    Xadow.greenLed(LEDOFF);              	// green led off
     delay(200);
 }
 
