@@ -12,6 +12,13 @@ This library is written to manage Xadow. It includes functions to:
 * read the battery voltage
 * put the xadow to sleep
 
+Also see the examples directory for:
+
+* reading the barometer
+* vibrating the vibrator
+* reading the accelerometer
+* reading and setting the real-time-clock
+
 FUNCTION
 -------------------------------------------------------------------------------------------------------------------
 It contains the following functions:
@@ -55,7 +62,7 @@ It will put your xadow to sleep for sSleep ms, then it will wake. You should use
 
 APPLICATION
 -------------------------------------------------------------------------------------------------------------------
-Here are some application examples:
+See the examples sub-directory which has complete and extended example code. The following is the basic examples of using the library:
 
 ### POWER DOWN MODE
 
